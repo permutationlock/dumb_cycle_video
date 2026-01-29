@@ -47,6 +47,9 @@ int main(int argc, char **argv) {
     write(STD_OUT, msg, sizeof(msg) - 1);
     write(STD_OUT, argv[0], strlen(argv[0]));
     write(STD_OUT, "\n", 1);
+
+    for (;;) {}
+
     return 0;
 }
 
