@@ -37,10 +37,16 @@ test: initramfs.cpio
 	qemu-system-x86_64 \
 		-kernel vmlinuz \
 		-initrd initramfs.cpio \
+		-vga virtio \
 		-enable-kvm -display sdl
 
 debug: initramfs.cpio
 	qemu-system-x86_64 \
 		-kernel vmlinuz \
 		-initrd initramfs.cpio \
-		-enable-kvm -display sdl -s -S
+		-vga virtio \
+		-enable-kvm -display sdl -s -S &
+	gdb -q dumb_cycle \
+		-ex "target remote :1234" \
+		-ex "hbreak main" \
+		-ex "continue"
